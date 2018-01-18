@@ -7,7 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-[Laravel Service Provider](https://laravel.com/docs/5.5/providers) bridge for [Zapheus](https://github.com/zapheus/zapheus) framework.
+Converts [Laravel Service Providers](https://laravel.com/docs/5.5/providers) to [Zapheus](https://github.com/zapheus/zapheus) providers.
 
 ## Install
 
