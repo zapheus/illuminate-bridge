@@ -29,7 +29,7 @@ $test = TestServiceProvider::class;
 
 $framework = new FrameworkProvider;
 
-$provider = new IlluminateProvider($test);
+$provider = new Provider($test);
 
 $container = $provider->register(new Container);
 

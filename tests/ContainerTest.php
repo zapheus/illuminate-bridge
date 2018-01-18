@@ -27,6 +27,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     {
         $container = new IlluminateContainer;
 
+        $container->bind('food', new FoodController);
+
         $this->container = new Container($container);
     }
 
@@ -51,8 +53,6 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
      */
     public function testHasMethod()
     {
-        $this->container->bind('food', new FoodController);
-
         $this->assertTrue($this->container->has('food'));
     }
 }

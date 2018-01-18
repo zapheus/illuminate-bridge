@@ -49,18 +49,4 @@ class Container implements ContainerInterface
     {
         return $this->container->bound($id);
     }
-
-    /**
-     * Calls methods from \Illuminate\Container\Container.
-     *
-     * @param  string $method
-     * @param  mixed  $parameters
-     * @return mixed
-     */
-    public function __call($method, $parameters)
-    {
-        $instance = array($this->container, $method);
-
-        return call_user_func_array($instance, $parameters);
-    }
 }
