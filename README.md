@@ -20,18 +20,19 @@ $ composer require zapheus/illuminate-bridge
 ## Usage
 
 ``` php
-use Acme\Providers\TestServiceProvider;
+use Acme\Providers\AuthServiceProvider;
+use Acme\Providers\RoleServiceProvider;
 use Zapheus\Bridge\Illuminate\Provider;
 use Zapheus\Container\Container;
 use Zapheus\Provider\FrameworkProvider;
 
-$test = TestServiceProvider::class;
+$providers = array(AuthServiceProvider::class, RoleServiceProvider::class);
 
-$framework = new FrameworkProvider;
-
-$provider = new Provider($test);
+$provider = new Provider($providers);
 
 $container = $provider->register(new Container);
+
+$framework = new FrameworkProvider;
 
 $container = $framework->register($container);
 ```

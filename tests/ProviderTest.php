@@ -64,13 +64,11 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegisterMethod()
     {
-        $fooo = new Provider(self::FOOD_PROVIDER);
+        $providers = array(self::FOOD_PROVIDER, self::TEST_PROVIDER);
 
-        $test = new Provider(self::TEST_PROVIDER);
+        $provider = new Provider($providers);
 
-        $container = $fooo->register($this->container);
-
-        $container = $test->register($container);
+        $container = $provider->register($this->container);
 
         $container = $this->framework->register($container);
 

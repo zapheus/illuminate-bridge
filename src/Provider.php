@@ -15,24 +15,21 @@ use Zapheus\Provider\ProviderInterface;
  */
 class Provider implements ProviderInterface
 {
-    /**
-     * @var string
-     */
-    protected $container = 'Illuminate\Container\Container';
+    const CONTAINER = 'Illuminate\Container\Container';
 
     /**
-     * @var string
+     * @var string[]
      */
-    protected $provider;
+    protected $providers;
 
     /**
      * Initializes the provider instance.
      *
-     * @param string $provider
+     * @param string[] $provider
      */
-    public function __construct($provider)
+    public function __construct($providers)
     {
-        $this->provider = $provider;
+        $this->providers = $providers;
     }
 
     /**
@@ -45,11 +42,13 @@ class Provider implements ProviderInterface
     {
         $illuminate = $this->container($container);
 
-        $provider = new $this->provider($illuminate);
+        foreach ($this->providers as $item) {
+            $provider = new $item($illuminate);
 
-        $provider->register();
+            $provider->register();
+        }
 
-        $container->set($this->container, $illuminate);
+        $container->set(self::CONTAINER, $illuminate);
 
         return $container;
     }
@@ -62,22 +61,18 @@ class Provider implements ProviderInterface
      */
     protected function container(WritableInterface $container)
     {
-        if ($container->has($this->container) === false) {
-            $loader = 'Illuminate\Config\LoaderInterface';
+        $loader = 'Illuminate\Config\LoaderInterface';
 
-            $laravel = new IlluminateContainer;
+        $laravel = new IlluminateContainer;
 
-            if (interface_exists($loader) === false) {
-                $config = $container->get(self::CONFIG);
+        if (interface_exists($loader) === false) {
+            $config = $container->get(self::CONFIG);
 
-                $items = $config->get('illuminate', array());
+            $items = $config->get('illuminate', array());
 
-                $laravel['config'] = new Repository($items);
-            }
-
-            return $laravel;
+            $laravel['config'] = new Repository($items);
         }
 
-        return $container->get($this->container);
+        return $laravel;
     }
 }
