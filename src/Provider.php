@@ -17,6 +17,8 @@ class Provider implements ProviderInterface
 {
     const CONTAINER = 'Illuminate\Container\Container';
 
+    const LOADER = 'Illuminate\Config\LoaderInterface';
+
     /**
      * @var string[]
      */
@@ -25,9 +27,9 @@ class Provider implements ProviderInterface
     /**
      * Initializes the provider instance.
      *
-     * @param string[] $provider
+     * @param string[] $providers
      */
-    public function __construct($providers)
+    public function __construct(array $providers)
     {
         $this->providers = $providers;
     }
@@ -61,11 +63,9 @@ class Provider implements ProviderInterface
      */
     protected function container(WritableInterface $container)
     {
-        $loader = 'Illuminate\Config\LoaderInterface';
-
         $laravel = new IlluminateContainer;
 
-        if (interface_exists($loader) === false) {
+        if (interface_exists(self::LOADER) === false) {
             $config = $container->get(self::CONFIG);
 
             $items = $config->get('illuminate', array());
