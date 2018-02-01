@@ -47,7 +47,11 @@ class Provider implements ProviderInterface
         foreach ($this->providers as $item) {
             $provider = new $item($illuminate);
 
+            $exists = method_exists($provider, 'boot');
+
             $provider->register();
+
+            $exists === true && $provider->boot();
         }
 
         $container->set(self::CONTAINER, $illuminate);
