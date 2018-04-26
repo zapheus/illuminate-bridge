@@ -59,7 +59,7 @@ class BladeRendererTest extends \PHPUnit_Framework_TestCase
 
         $expected = 'Hello world, Maximus Decimus Meridius';
 
-        $result = $this->renderer->render('sample', $data);
+        $result = $this->renderer->render('Sample', $data);
 
         $this->assertEquals($expected, $result);
     }
