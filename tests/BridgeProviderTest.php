@@ -6,12 +6,12 @@ use Zapheus\Container\Container;
 use Zapheus\Provider\Configuration;
 
 /**
- * Illuminate Provider Test
+ * Bridge Provider Test
  *
  * @package Zapheus
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class IlluminateProviderTest extends \PHPUnit_Framework_TestCase
+class BridgeProviderTest extends \PHPUnit_Framework_TestCase
 {
     const FOOD_PROVIDER = 'Zapheus\Bridge\Illuminate\Fixture\Providers\FoodServiceProvider';
 
@@ -38,7 +38,7 @@ class IlluminateProviderTest extends \PHPUnit_Framework_TestCase
     {
         $this->container = new Container;
 
-        $interface = (string) IlluminateProvider::CONFIG;
+        $interface = (string) BridgeProvider::CONFIG;
 
         $config = new Configuration;
 
@@ -54,15 +54,15 @@ class IlluminateProviderTest extends \PHPUnit_Framework_TestCase
     {
         $providers = array(self::FOOD_PROVIDER, self::TEST_PROVIDER);
 
-        $provider = new IlluminateProvider($providers);
+        $provider = new BridgeProvider((array) $providers);
 
         $container = $provider->register($this->container);
 
-        $container = $container->get(IlluminateProvider::CONTAINER);
+        $container = $container->get(BridgeProvider::CONTAINER);
 
         $expected = (string) self::TEST_CONTROLLER;
 
-        $result = $container->make('test');
+        $result = $container->make((string) 'test');
 
         $this->assertInstanceOf($expected, $result);
     }

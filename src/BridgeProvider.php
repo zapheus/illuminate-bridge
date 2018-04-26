@@ -8,12 +8,12 @@ use Zapheus\Container\WritableInterface;
 use Zapheus\Provider\ProviderInterface;
 
 /**
- * Illuminate Provider
+ * Illuminate Bridge Provider
  *
  * @package Zapheus
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class IlluminateProvider implements ProviderInterface
+class BridgeProvider implements ProviderInterface
 {
     const CONTAINER = 'Illuminate\Container\Container';
 

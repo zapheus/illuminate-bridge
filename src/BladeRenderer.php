@@ -1,6 +1,6 @@
 <?php
 
-namespace Staticka\Renderers;
+namespace Zapheus\Bridge\Illuminate;
 
 use Illuminate\Contracts\View\Factory;
 use Zapheus\Renderer\RendererInterface;
