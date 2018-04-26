@@ -4,17 +4,18 @@ namespace Zapheus\Bridge\Illuminate;
 
 use Zapheus\Container\Container;
 use Zapheus\Provider\Configuration;
-use Zapheus\Provider\FrameworkProvider;
 
 /**
- * Provider Test
+ * Illuminate Provider Test
  *
  * @package Zapheus
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class ProviderTest extends \PHPUnit_Framework_TestCase
+class IlluminateProviderTest extends \PHPUnit_Framework_TestCase
 {
     const FOOD_PROVIDER = 'Zapheus\Bridge\Illuminate\Fixture\Providers\FoodServiceProvider';
+
+    const TEST_CONTROLLER = 'Zapheus\Bridge\Illuminate\Fixture\Controllers\TestController';
 
     const TEST_PROVIDER = 'Zapheus\Bridge\Illuminate\Fixture\Providers\TestServiceProvider';
 
@@ -22,11 +23,6 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      * @var \Zapheus\Container\WritableInterface
      */
     protected $container;
-
-    /**
-     * @var \Zapheus\Provider\FrameworkProvider
-     */
-    protected $framework;
 
     /**
      * @var \Zapheus\Provider\ProviderInterface
@@ -40,21 +36,13 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $message = 'Illuminate Container is not yet installed.';
-
-        $container = 'Illuminate\Container\Container';
-
-        class_exists($container) || $this->markTestSkipped($message);
-
         $this->container = new Container;
 
-        $class = 'Zapheus\Provider\ConfigurationInterface';
+        $interface = (string) IlluminateProvider::CONFIG;
 
         $config = new Configuration;
 
-        $this->container->set($class, $config);
-
-        $this->framework = new FrameworkProvider;
+        $this->container->set($interface, $config);
     }
 
     /**
@@ -66,15 +54,15 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
     {
         $providers = array(self::FOOD_PROVIDER, self::TEST_PROVIDER);
 
-        $provider = new Provider($providers);
+        $provider = new IlluminateProvider($providers);
 
         $container = $provider->register($this->container);
 
-        $container = $this->framework->register($container);
+        $container = $container->get(IlluminateProvider::CONTAINER);
 
-        $expected = 'Zapheus\Bridge\Illuminate\Fixture\Controllers\TestController';
+        $expected = (string) self::TEST_CONTROLLER;
 
-        $result = $container->get('test');
+        $result = $container->make('test');
 
         $this->assertInstanceOf($expected, $result);
     }
