@@ -27,13 +27,11 @@ use Zapheus\Container\Container;
 
 $providers = array(AuthServiceProvider::class, RoleServiceProvider::class);
 
-$provider = new BridgeProvider($providers);
+$provider = new BridgeProvider((array) $providers);
 
 $container = $provider->register(new Container);
 
-$framework = new FrameworkProvider;
-
-$container = $framework->register($container);
+$illuminate = $container->get(BridgeProvider::CONTAINER);
 ```
 
 ## Change log
