@@ -22,13 +22,12 @@ $ composer require zapheus/illuminate-bridge
 ``` php
 use Acme\Providers\AuthServiceProvider;
 use Acme\Providers\RoleServiceProvider;
-use Zapheus\Bridge\Illuminate\Provider;
+use Zapheus\Bridge\Illuminate\BridgeProvider;
 use Zapheus\Container\Container;
-use Zapheus\Provider\FrameworkProvider;
 
 $providers = array(AuthServiceProvider::class, RoleServiceProvider::class);
 
-$provider = new Provider($providers);
+$provider = new BridgeProvider($providers);
 
 $container = $provider->register(new Container);
 
