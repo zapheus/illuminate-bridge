@@ -45,7 +45,7 @@ class BladeRendererTest extends \PHPUnit_Framework_TestCase
 
         $container = $container->get(BridgeProvider::CONTAINER);
 
-        $this->renderer = new BladeRenderer($container->get('view'));
+        $this->renderer = new BladeRenderer($container->make('view'));
     }
 
     /**
