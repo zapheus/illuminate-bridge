@@ -8,7 +8,7 @@ use Illuminate\Support\ServiceProvider;
  * Test Service Provider
  *
  * @package Zapheus
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class TestServiceProvider extends ServiceProvider
 {

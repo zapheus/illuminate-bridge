@@ -9,7 +9,7 @@ use Zapheus\Provider\Configuration;
  * Blade Renderer Test
  *
  * @package Zapheus
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class BladeRendererTest extends \PHPUnit_Framework_TestCase
 {
@@ -37,7 +37,10 @@ class BladeRendererTest extends \PHPUnit_Framework_TestCase
 
         $providers[] = 'Illuminate\View\ViewServiceProvider';
 
-        class_exists(end($providers)) || $this->markTestSkipped($message);
+        if (! class_exists(end($providers)))
+        {
+            $this->markTestSkipped($message);
+        }
 
         $provider = new BridgeProvider((array) $providers);
 
@@ -71,7 +74,7 @@ class BladeRendererTest extends \PHPUnit_Framework_TestCase
      */
     protected function config()
     {
-        $path = __DIR__ . '/Fixture/Illuminate';
+        $path = (string) __DIR__ . '/Fixture/Illuminate';
 
         $config = new Configuration;
 
@@ -79,8 +82,8 @@ class BladeRendererTest extends \PHPUnit_Framework_TestCase
 
         $view = require (string) $path . '/View.php';
 
-        $config->set('illuminate.filesystems', (array) $filesystems);
+        $config->set('illuminate.filesystems', $filesystems);
 
-        return $config->set('illuminate.view', (array) $view);
+        return $config->set('illuminate.view', $view);
     }
 }

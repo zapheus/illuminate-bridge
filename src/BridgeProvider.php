@@ -11,7 +11,7 @@ use Zapheus\Provider\ProviderInterface;
  * Illuminate Bridge Provider
  *
  * @package Zapheus
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class BridgeProvider implements ProviderInterface
 {
@@ -44,7 +44,8 @@ class BridgeProvider implements ProviderInterface
     {
         $illuminate = $this->container($container);
 
-        foreach ($this->providers as $item) {
+        foreach ($this->providers as $item)
+        {
             $provider = new $item($illuminate);
 
             $exists = method_exists($provider, 'boot');
@@ -69,7 +70,8 @@ class BridgeProvider implements ProviderInterface
     {
         $laravel = new IlluminateContainer;
 
-        if (interface_exists(self::LOADER) === false) {
+        if (interface_exists(self::LOADER) === false)
+        {
             $config = $container->get(self::CONFIG);
 
             $items = $config->get('illuminate', array());

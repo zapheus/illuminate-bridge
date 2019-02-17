@@ -9,7 +9,7 @@ use Zapheus\Provider\Configuration;
  * Bridge Provider Test
  *
  * @package Zapheus
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class BridgeProviderTest extends \PHPUnit_Framework_TestCase
 {
